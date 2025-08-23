@@ -1,0 +1,18 @@
+<div id="<%= dom_id monitor_target %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div>
+    <strong class="block font-medium mb-1">Name:</strong>
+    <%= monitor_target.name %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Url:</strong>
+    <%= monitor_target.url %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Image:</strong>
+    <%= link_to monitor_target.image.filename, monitor_target.image, class: "text-gray-700 underline hover:no-underline" if monitor_target.image.attached? %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Status:</strong>
+    <%= monitor_target.status %>
+  </div>
+</div>

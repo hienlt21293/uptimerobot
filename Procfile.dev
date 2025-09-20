@@ -1,2 +1,3 @@
 web: bin/rails server
 css: bin/rails tailwindcss:watch
+worker: RAILS_ENV=development bin/rails solid_queue:start

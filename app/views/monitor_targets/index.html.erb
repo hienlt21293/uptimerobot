@@ -1,0 +1,44 @@
+<%= turbo_stream_from "monitor_targets_stream" %>
+<%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+
+<div class="flex items-center justify-between mb-4">
+  <h1 class="text-2xl font-bold">Monitor Targets</h1>
+  <%= link_to 'New monitor target', new_monitor_target_path,
+        class: "bg-blue-500 text-white px-4 py-2 rounded" %>
+</div>
+
+
+<table class="min-w-full mt-4 border border-gray-200">
+  <thead>
+    <tr class="bg-gray-100">
+      <th class="px-4 py-2 border">Name</th>
+      <th class="px-4 py-2 border">URL</th>
+      <th class="px-4 py-2 border">Status</th>
+      <th class="px-4 py-2 border">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @monitor_targets.each do |target| %>
+      <tr class="text-center">
+        <td class="px-4 py-2 border text-center">
+
+          <% if target.image.attached? %>
+            <%= image_tag target.image.variant(resize_to_limit: [24, 24]), class: "inline-block" %>
+          <% end %>
+          <%= target.name %>
+
+        </td>
+        <td class="px-4 py-2 border"><%= target.url %></td>
+        <td class="px-4 py-2 border"><%= target.status %></td>
+        <td class="px-4 py-2 border">
+          <%= link_to 'Show', target, class: "bg-gray-200 px-2 py-1 rounded mr-1" %>
+          <%= link_to 'Edit', edit_monitor_target_path(target), class: "bg-gray-200 px-2 py-1 rounded mr-1" %>
+          <%= link_to 'Destroy', target, method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 text-white px-2 py-1 rounded" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

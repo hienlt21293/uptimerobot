@@ -5,7 +5,7 @@ class PingTargetJob < ApplicationJob
     Rails.logger.info "[PingTargetJob] Starting ping at #{Time.current}"
     MonitorTarget.find_each do |target|
       new_status = ping(target.url) ? "OK" : "FAILED"
-
+      puts "Ping result: #{target.url} is #{new_status}"
       if target.status != new_status
         target.update(status: new_status)
         Turbo::StreamsChannel.broadcast_refresh_later_to("monitor_targets_stream")
